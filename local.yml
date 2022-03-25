@@ -18,3 +18,15 @@
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
         method: user
+
+    - name: Install flatpaks
+      flatpak:
+        name:
+          - com.bitwarden.desktop
+          - com.leinardi.gwe
+          - com.mattermost.desktop
+          - com.spotify.Client
+          - net.cozic.joplin_desktop
+          - org.signal.Signal
+          - us.zoom.Zoom
+        method: user
