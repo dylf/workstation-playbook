@@ -6,6 +6,7 @@
   tasks:
     - name: install packages
       package:
+        state: present
         name:
           - flatpak
           - htop
@@ -21,6 +22,7 @@
 
     - name: Install flatpaks
       flatpak:
+        state: present
         name:
           - com.bitwarden.desktop
           - com.leinardi.gwe
