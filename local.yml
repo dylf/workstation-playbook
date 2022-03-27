@@ -10,6 +10,7 @@
         name:
           - flatpak
           - htop
+          - steam
           - vim
           - virt-manager
 
