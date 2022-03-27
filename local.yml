@@ -19,46 +19,46 @@
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-        method: user
+        method: system
 
     - name: Install Bitwarden
       flatpak:
         state: present
         name: com.bitwarden.desktop
-        method: user
+        method: system
 
     - name: Install GreenWithEnvy
       flatpak:
         name: com.leinardi.gwe
         state: present
-        method: user
+        method: system
 
     - name: Install Mattermost
       flatpak:
         name: com.mattermost.desktop
         state: present
-        method: user
+        method: system
 
     - name: Install Spotify
       flatpak:
         name: com.spotify.Client
         state: present
-        method: user
+        method: system
 
     - name: Install Joplin
       flatpak:
         name: net.cozic.joplin_desktop
         state: present
-        method: user
+        method: system
 
     - name: Install Signal
       flatpak:
         name: org.signal.Signal
         state: present
-        method: user
+        method: system
 
     - name: Install Zoom
       flatpak:
         name: us.zoom.Zoom
         state: present
-        method: user
+        method: system
