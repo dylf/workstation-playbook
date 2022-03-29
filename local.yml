@@ -3,6 +3,8 @@
   connection: local
   become: true
 
+  roles:
+    - brave
   tasks:
     - name: install packages
       package:
