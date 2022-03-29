@@ -1,2 +1,2 @@
 ---
-- include_tasks: '{{ ansible_os_family }}.yml'
+- import_tasks: '{{ ansible_os_family }}.yml'
