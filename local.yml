@@ -5,6 +5,7 @@
 
   roles:
     - brave
+    - node
   tasks:
     - name: install packages
       package:
@@ -15,19 +16,12 @@
           - steam
           - vim
           - virt-manager
-          - vlc
 
     - name: Add the flathub flatpak repository remote to the user installation
       flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-        method: system
-
-    - name: Install Bitwarden
-      flatpak:
-        state: present
-        name: com.bitwarden.desktop
         method: system
 
     - name: Install GreenWithEnvy
@@ -42,15 +36,21 @@
         state: present
         method: system
 
-    - name: Install Joplin
-      flatpak:
-        name: net.cozic.joplin_desktop
-        state: present
-        method: system
-
     - name: Install Mattermost
       flatpak:
         name: com.mattermost.desktop
+        state: present
+        method: system
+
+    - name: Install Neovim
+      flatpak:
+        name: io.neovim.nvim
+        state: present
+        method: system
+
+    - name: Install OBS Studio
+      flatpak:
+        name: com.obsproject.Studio
         state: present
         method: system
 
@@ -83,3 +83,19 @@
         name: us.zoom.Zoom
         state: present
         method: system
+
+    - name: Install zsh
+      package:
+        name: zsh
+
+    - name: Install Discord
+      package:
+        name: discord
+
+    - name: Install Blender
+      package:
+        name: blender
+
+    - name: Install vlc
+      package:
+        name: vlc

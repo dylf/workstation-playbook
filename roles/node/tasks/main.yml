@@ -1,0 +1,35 @@
+---
+- name: Check for fnm
+  command: command -v fnm >/dev/null 2>&1
+  register: fnm_exists
+  no_log: true
+  ignore_errors: yes
+
+- name: Download fnm install script
+  get_url:
+    url: https://fnm.vercel.app/install
+    dest: /tmp/fnm-install.sh
+    mode: 755
+  when: fnm_exists.rc != 0
+  register: fnm_script
+
+- name: Run fnm install script
+  shell: /tmp/fnm-install.sh
+  when: fnm_exists.changed
+
+- name: Remove the fnm installer
+  file:
+    path: /tmp/fnm-install.sh
+    state: absent
+
+- name: Install node lts
+  command: fnm use lts-latest --install-if-
+
+- name: Install npm
+  command: npm install -g npm
+
+- name: Install yarn
+  command: npm install -g yarn
+
+- name: Install typescript
+  command: npm install -g typescript
