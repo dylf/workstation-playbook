@@ -11,7 +11,7 @@
     dest: /tmp/sh.rustup.rs
     mode: '0755'
     force: 'yes'
-  when: cargo_exists.rc == 0
+  when: cargo_exists.rc != 0
   register: rustup_download
   tags:
     - rust
