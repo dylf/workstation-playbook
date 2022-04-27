@@ -36,7 +36,9 @@
     - node
 
 - name: Install node lts
-  command: '${HOME}/.fnm/fnm env && fnm use lts-latest --install-if-missing'
+  command:
+    - '${HOME}/.fnm/fnm env'
+    - fnm use lts-latest --install-if-missing
   tags:
     - fnm
     - node
