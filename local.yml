@@ -4,9 +4,9 @@
   become: true
 
   roles:
-    - { role: brave, become: true }
-    - { role: node, become: false }
-    - { role: rust, become: false }
+    - brave
+    - node
+    - rust
   tasks:
     - name: install packages
       package:
