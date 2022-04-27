@@ -35,7 +35,7 @@
     - node
 
 - name: Install node lts
-  command: fnm use lts-latest --install-if-
+  command: '{{ansible_env.HOME}}/.fnm/fnm use lts-latest --install-if-'
   tags:
     - fnm
     - node
