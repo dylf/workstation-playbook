@@ -13,6 +13,7 @@
     url: https://fnm.vercel.app/install
     dest: /tmp/fnm-install.sh
     mode: 0755
+    force: yes
   when: fnm_exists.rc != 0
   register: fnm_script
   tags:
@@ -35,7 +36,7 @@
     - node
 
 - name: Install node lts
-  command: '{{ansible_env.HOME}}/.fnm/fnm use lts-latest --install-if-missing'
+  command: '${HOME}/.fnm/fnm use lts-latest --install-if-missing'
   tags:
     - fnm
     - node
