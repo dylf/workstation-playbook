@@ -4,6 +4,9 @@
   register: fnm_exists
   no_log: true
   ignore_errors: yes
+  tags:
+    - fnm
+    - node
 
 - name: Download fnm install script
   get_url:
@@ -12,24 +15,45 @@
     mode: 755
   when: fnm_exists.rc != 0
   register: fnm_script
+  tags:
+    - fnm
+    - node
 
 - name: Run fnm install script
   shell: /tmp/fnm-install.sh
   when: fnm_exists.changed
+  tags:
+    - fnm
+    - node
 
 - name: Remove the fnm installer
   file:
     path: /tmp/fnm-install.sh
     state: absent
+  tags:
+    - fnm
+    - node
 
 - name: Install node lts
   command: fnm use lts-latest --install-if-
+  tags:
+    - fnm
+    - node
 
 - name: Install npm
   command: npm install -g npm
+  tags:
+    - node
+    - npm-global
 
 - name: Install yarn
   command: npm install -g yarn
+  tags:
+    - node
+    - npm-global
 
 - name: Install typescript
   command: npm install -g typescript
+  tags:
+    - node
+    - npm-global
