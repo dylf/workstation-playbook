@@ -6,6 +6,7 @@
   roles:
     - brave
     - node
+    - rust
   tasks:
     - name: install packages
       package:
