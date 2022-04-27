@@ -1,0 +1,28 @@
+---
+- name: Check for cargo
+  shell: command -v cargo > /dev/null 2>&1
+  register: cargo_exists
+  no_log: true
+  ignore_errors: yes
+
+- name: Download rustup
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: '0755'
+    force: 'yes'
+  when: cargo_exists.rc == 0
+  register: rustup_download
+  tags:
+    - rust
+
+- name: Install rust/cargo
+  shell: /tmp/sh.rustup.rs -y
+  when: rustup_download.changed
+  tags:
+    - rust
+
+- name: Remove rustup
+  file:
+    path: /tmp/sh.rustup.rs
+    state: absent

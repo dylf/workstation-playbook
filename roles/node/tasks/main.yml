@@ -21,7 +21,7 @@
 
 - name: Run fnm install script
   shell: /tmp/fnm-install.sh
-  when: fnm_exists.changed
+  when: fnm_script.changed
   tags:
     - fnm
     - node
