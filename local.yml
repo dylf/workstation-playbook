@@ -3,10 +3,46 @@
   connection: local
   become: true
 
+  # Php is required for composer
+  pre_tasks:
+    - name: Install php
+      package:
+        state: present
+        name:
+          - php
+          - php-curl
+          - php-gd
+          - php-mbstring
+          - php-mysql
+          - php-xml
+          - php-zip
+      tags:
+        - php
+
+    - name: Remove apache because php installs it for some reason
+      package:
+        state: absent
+        name: apache2
+      tags:
+        - php
+
   roles:
     - brave
     - node
     - rust
+    - role: geerlingguy.docker
+      become: true
+      tags:
+        - docker
+    - role: geerlingguy.composer
+      become: true
+      tags:
+        - php
+    - role: gantsign.visual-studio-code
+      tags:
+        - vscode
+
+
   tasks:
     - name: install packages
       package:
@@ -23,6 +59,12 @@
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        method: system
+
+    - name: Install Bottles
+      flatpak:
+        name: com.usebottles.bottles
+        state: present
         method: system
 
     - name: Install GreenWithEnvy
@@ -100,3 +142,39 @@
     - name: Install vlc
       package:
         name: vlc
+
+    - name: Install fzf
+      package:
+        name: fzf
+
+    - name: Install ranger
+      package:
+        name: ranger
+
+    - name: Install bat
+      package:
+        name: bat
+
+    - name: Install ripgrep
+      package:
+        name:
+
+    - name: Install tmux
+      package:
+        name: tmux
+
+    - name: Install peek
+      package:
+        name: peek
+
+    - name: Install Lando
+      apt:
+        deb: "https://files.devwithlando.io/lando-stable.deb"
+        state: present
+
+    - name: Install AWS Cli
+      include: tasks/aws.yml
+      become: true
+      tags:
+        - awscli
+

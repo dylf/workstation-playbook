@@ -1,0 +1,5 @@
+---
+roles:
+  - geerlingguy.docker
+  - geerlingguy.composer
+  - gantsign.visual-studio-code

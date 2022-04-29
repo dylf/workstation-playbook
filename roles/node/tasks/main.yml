@@ -1,8 +1,18 @@
 ---
+- name: Install node
+  package:
+    name: nodejs
+    state: present
+
+- name: Set fnm_dir
+  set_fact:
+    fnm_dir: "{{ lookup('env', 'HOME')}}/.fnm"
+  tags:
+    - fnm
+
 - name: Check for fnm
-  command: command -v fnm >/dev/null 2>&1
+  command: command -v fnm > /dev/null 2>&1
   register: fnm_exists
-  no_log: true
   ignore_errors: yes
   tags:
     - fnm
@@ -21,7 +31,7 @@
     - node
 
 - name: Run fnm install script
-  shell: /tmp/fnm-install.sh
+  shell: /tmp/fnm-install.sh --install-dir {{ fnm_dir }}
   when: fnm_script.changed
   tags:
     - fnm
@@ -35,28 +45,25 @@
     - fnm
     - node
 
-- name: Install node lts
-  command:
-    - '${HOME}/.fnm/fnm env'
-    - fnm use lts-latest --install-if-missing
+- name: fnm use node lts
+  shell:
+    cmd: |
+      eval "$(fnm env)"
+      fnm use lts-latest --install-if-missing
+  environment:
+    PATH: '{{ fnm_dir }}:{{ ansible_env.PATH }}'
   tags:
     - fnm
     - node
 
-- name: Install npm
-  command: npm install -g npm
-  tags:
-    - node
-    - npm-global
-
-- name: Install yarn
-  command: npm install -g yarn
-  tags:
-    - node
-    - npm-global
-
-- name: Install typescript
-  command: npm install -g typescript
-  tags:
-    - node
-    - npm-global
+# - name: Install npm global packages
+#   npm:
+#     name: npm
+#     global: yes
+  # loop:
+  #   - npm
+  #   - yarn
+  #   - typescript
+  # tags:
+  #   - node
+  #   - npm-global
