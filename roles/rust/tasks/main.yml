@@ -4,6 +4,8 @@
   register: cargo_exists
   no_log: true
   ignore_errors: yes
+  tags:
+    - rust
 
 - name: Download rustup
   get_url:
