@@ -1,0 +1,21 @@
+---
+- name: Download Joplin install/update script
+  get_url:
+    url: https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh
+    dest: /tmp/joplin.sh
+    mode: '0755'
+    force: 'yes'
+  tags:
+    - joplin
+
+- name: Install/update Joplin
+  shell: /tmp/joplin.sh
+  tags:
+    - joplin
+
+- name: Remove Joplin script
+  file:
+    path: /tmp/joplin.sh
+    state: absent
+  tags:
+    - joplin

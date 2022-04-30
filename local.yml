@@ -158,3 +158,9 @@
       become: true
       tags:
         - awscli
+
+    - name: Install Joplin
+      include: tasks/joplin.yml
+      become: no
+      tags:
+        - joplin
