@@ -147,6 +147,12 @@
         deb: 'https://files.devwithlando.io/lando-stable.deb'
         state: present
 
+    - name: Install appimagelauncher
+      import_tasks: tasks/appimagelauncher.yml
+      become: true
+      tags:
+        - appimagelauncher
+
     - name: Install AWS Cli
       include: tasks/aws.yml
       become: true
