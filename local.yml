@@ -42,17 +42,24 @@
       tags:
         - vscode
 
-
   tasks:
     - name: install packages
       package:
         state: present
         name:
+          - bat
           - flatpak
+          - fzf
           - htop
+          - peek
+          - ranger
+          - ripgrep
           - steam
+          - tmux
           - vim
           - virt-manager
+          - vlc
+          - zsh
 
     - name: Add the flathub flatpak repository remote to the user installation
       flatpak_remote:
@@ -127,10 +134,6 @@
         state: present
         method: system
 
-    - name: Install zsh
-      package:
-        name: zsh
-
     - name: Install Discord
       package:
         name: discord
@@ -139,37 +142,9 @@
       package:
         name: blender
 
-    - name: Install vlc
-      package:
-        name: vlc
-
-    - name: Install fzf
-      package:
-        name: fzf
-
-    - name: Install ranger
-      package:
-        name: ranger
-
-    - name: Install bat
-      package:
-        name: bat
-
-    - name: Install ripgrep
-      package:
-        name:
-
-    - name: Install tmux
-      package:
-        name: tmux
-
-    - name: Install peek
-      package:
-        name: peek
-
     - name: Install Lando
       apt:
-        deb: "https://files.devwithlando.io/lando-stable.deb"
+        deb: 'https://files.devwithlando.io/lando-stable.deb'
         state: present
 
     - name: Install AWS Cli
@@ -177,4 +152,3 @@
       become: true
       tags:
         - awscli
-
