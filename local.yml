@@ -77,6 +77,12 @@
         state: present
         method: system
 
+    - name: Install Cura
+      flatpak:
+        name: com.ultimaker.cura
+        state: present
+        method: system
+
     - name: Install GreenWithEnvy
       flatpak:
         name: com.leinardi.gwe
@@ -86,12 +92,6 @@
     - name: Install Heroic
       flatpak:
         name: com.heroicgameslauncher.hgl
-        state: present
-        method: system
-
-    - name: Install Mattermost
-      flatpak:
-        name: com.mattermost.desktop
         state: present
         method: system
 
