@@ -1,0 +1,14 @@
+---
+- name: Ensure fonts directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts/VictorMono"
+    state: directory
+  tags: [fonts]
+
+- name: Download VictorMono
+  ansible.builtin.unarchive:
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/VictorMono.zip
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts/VictorMono"
+    creates: "{{ lookup('env', 'HOME') }}/.local/share/fonts/VictorMono/readme.md"
+    remote_src: yes
+  tags: [fonts]
