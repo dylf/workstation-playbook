@@ -5,6 +5,9 @@
 
   # Php is required for composer
   pre_tasks:
+    - name: Switch Pop!_OS to Ubuntu
+      set_fact: ansible_distribution="Ubuntu"
+      when: ansible_distribution == "Pop!_OS"
     - name: Install php
       package:
         state: present
